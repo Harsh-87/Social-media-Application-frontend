@@ -19,11 +19,11 @@ class CommentItem extends Component {
         <div className="row">
           <div className="col-1">
             <Link to="/profiles">
-              <img class="rounded-circle" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
+              <img class="rounded-circle" src={comment.author.avatar} />
             </Link>
             <p className="text-center">{comment.author.username}</p>
           </div>
-          <div className="col-10 border-left">
+          <div className="col-10 border-left text-left">
             <p className="lead">{comment.comment}</p>
           </div>
           <div className="col-1">

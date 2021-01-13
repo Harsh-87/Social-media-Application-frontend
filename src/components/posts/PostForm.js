@@ -11,6 +11,8 @@ class PostForm extends Component {
     this.state = {
       title: '',
       description: '',
+      image: null,
+      imgURL: null,
       errors: {}
     }
     this.onChange = this.onChange.bind(this);
@@ -26,22 +28,24 @@ class PostForm extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { user } = this.props.auth;
-    const newPost = {
-      title: this.state.title,
-      description: this.state.description,
-    }
-
+    let newPost = new FormData();
+    newPost.append("title", this.state.title);
+    newPost.append("description", this.state.description);
+    newPost.append("image", this.state.image);
     this.props.addPost(newPost);
-    this.setState({ title: '', description: '' });
-
+    this.setState({ title: '', description: '', image: null, imgURL: null });
   }
 
   onChange(e) {
     e.preventDefault();
-
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    if (e.target.name === 'image') {
+      this.setState({ [e.target.name]: e.target.files[0], imgURL: URL.createObjectURL(e.target.files[0]) })
+    }
+    else {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
   }
 
   render() {
@@ -70,7 +74,18 @@ class PostForm extends Component {
                   onChange={this.onChange}
                   error={errors.text}
                 />
+                {this.state.imgURL ? (<img style={{ width: "600px", height: "500px" }} src={this.state.imgURL} />) : ('')}
               </div>
+              <label for="image"><i class='m-2 p-2 fas fa-camera btn btn-light text-info' style={{ cursor: "pointer" }}> Upload Image </i></label>
+              <input
+                type="file"
+                name="image"
+                id="image"
+                accept="image/*"
+                onChange={this.onChange}
+                style={{ display: "none" }}
+                error={errors.text}
+              />
               <button onClick={this.onSubmit} className="btn btn-light">Submit</button>
             </form>
           </div>

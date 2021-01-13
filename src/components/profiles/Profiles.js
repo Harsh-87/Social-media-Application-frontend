@@ -11,7 +11,7 @@ class Profiles extends Component {
   }  
 
   render() {
-
+    console.log(this.props);
     const {profilesLoading, profiles} = this.props.profile;
     let profileItems;
 

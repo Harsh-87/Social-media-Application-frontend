@@ -13,7 +13,7 @@ class ProfilesItem extends Component {
         <div className="row align-items-center">
           <div className="col-2">
             <div height="200px" width="200px">
-              <img class="rounded-circle" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" />
+              <img className="rounded-circle" src={profile.avatar} />
             </div>
           </div>
           <div className="col-8 border-left text-left">

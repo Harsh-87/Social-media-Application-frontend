@@ -34,23 +34,32 @@ class PostItem extends Component {
 
     const { post, auth, showActions } = this.props;
     console.log('Post Item', post);
+    const date = new Date(post.createdAt);
     return (
-      <div className="card card-body mb-3 justify-content-start">
-        <div className="row">
-          <div className="col-md-9 text-left">
-            <h3 className="text-info">{post.title}</h3>
+      <div className="card card-body mb-3">
+        <div className="row align-items-center">
+          <div className="col-md-10 text-left">
+            <div className="row align-items-center">
+              <div className="col-1">
+                <span><img className="rounded-circle" src={post?.author?.avatar} /></span>
+              </div>
+              <div className="col-8 p-0">
+                <span>{post?.author?.firstname} {post?.author?.lastname}</span>
+                <br />
+                <span className="small">{date.toLocaleTimeString([], { timeStyle: 'short' })}</span>
+              </div>
+              <div className="col-3 text-right text-secondary small">
+                <span>{date.toLocaleDateString("en-US", { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+              </div>
+            </div>
           </div>
           {showActions && (
-            <div className="col-md-3 border-left">
+            <div className="col-md-2 border-left">
               <React.Fragment>
-                <button type="button" onClick={this.onLikeClick.bind(this, post._id)} className="btn btn-light mr-1">
-                  <i className="fas fa-thumbs-up text-info"></i>
-                  <span className="badge badge-light">{post.likes.length}</span>
-                </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
+              <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                   <i className="fas fa-comment" />
                 </Link>
-                {post.user === auth.user.id ? (<button onClick={this.onDeleteClick.bind(this, post._id)} type="button" className="btn btn-danger mr-1">
+                {post.author._id === auth.user._id ? (<button onClick={this.onDeleteClick.bind(this, post._id)} type="button" className="btn btn-danger mr-1">
                   <i className="fas fa-trash" />
                 </button>) : <React.Fragment></React.Fragment>}
               </React.Fragment>
@@ -59,13 +68,30 @@ class PostItem extends Component {
           )}
         </div>
         <hr />
-        <div class="row">
+        <div classname="row">
           <div className="col-md-11 text-left">
-            <p className="lead">{post.description}</p>
+            <span className="h4 text-info">{post?.title}</span>
+            <p className="lead">{post?.description}</p>
+            {post.image ? (<img style={{ width: "600px", height: "500px" }} src={"http://localhost:5000/" + post?.image} />) : ('')}
           </div>
         </div>
+        <hr />
+        <div className="row">
+          {showActions && (
+            <div className="col-md-12 text-left">
+              <React.Fragment>
+                <button type="button" onClick={this.onLikeClick.bind(this, post?._id)} className="btn btn-light mr-1">
+                  <i className="fas fa-thumbs-up text-info"></i>
+                  <span className="badge badge-light">{post?.likes?.length}</span>
+                </button>
+                {post.likes.map(element=>{
+                  return <img style={{height:"35px", width:"35px"}} className="rounded-circle" src={element.author.avatar} />
+                })}
+              </React.Fragment>
+            </div>
+          )}
+        </div>
       </div>
-
     )
 
   }

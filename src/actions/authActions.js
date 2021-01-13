@@ -34,6 +34,14 @@ export const setCurrentUser = (user) => {
 
 //Log User Out 
 export const logoutUser = () => dispatch => {
-    dispatch(setCurrentUser({}));
+    axios
+        .get('users/logout')
+        .then(res => {
+            dispatch(setCurrentUser({}));
+        })
+        .catch(err => dispatch({
+            type: GET_ERRORS,
+            payload: err
+        }))
 }
 
