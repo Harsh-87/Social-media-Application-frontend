@@ -33,12 +33,11 @@ class PostItem extends Component {
   render() {
 
     const { post, auth, showActions } = this.props;
-    console.log('Post Item', post);
     const date = new Date(post.createdAt);
     return (
       <div className="card card-body mb-3">
         <div className="row align-items-center">
-          <div className="col-md-10 text-left">
+          <div className={showActions ? "col-md-10 text-left" : "col-md-12 text-left"}>
             <div className="row align-items-center">
               <div className="col-1">
                 <span><img className="rounded-circle" src={post?.author?.avatar} /></span>

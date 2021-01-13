@@ -7,7 +7,6 @@ class ProfilesItem extends Component {
   render() {
 
     const { profile } = this.props;
-    console.log(profile);
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row align-items-center">
@@ -16,12 +15,15 @@ class ProfilesItem extends Component {
               <img className="rounded-circle" src={profile.avatar} />
             </div>
           </div>
-          <div className="col-8 border-left text-left">
+          <div className="col-6 border-left text-left">
             <p style={{fontSize:"20px", fontWeight:"600"}} >{profile.firstname} {profile.lastname}</p>
             <p style={{fontSize:"16px"}}>{profile.email}</p>
           </div>
-          <div className="col-2">
-            <Link to={`/profile/${profile.username}`} className="btn btn-info">View Profile</Link>
+          <div className="col-4">
+            <Link to={`/profile/${profile.username}`} className="btn btn-info m-1">View Profile</Link>
+            {/* <button className="btn btn-primary m-1">Connect</button>
+            <button className="btn btn-secondary m-1">Pending</button>
+            <button className="btn btn-success m-1">Friends</button> */}
           </div>
         </div>
       </div>
