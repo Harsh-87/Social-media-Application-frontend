@@ -5,8 +5,6 @@ import {
   PROFILE_LOADING,
   PROFILES_LOADING,
   CLEAR_CURRENT_PROFILE,
-  SET_CURRENT_USER,
-  GET_ERRORS
 } from "./types";
 
 //Get All Profiles
@@ -31,7 +29,6 @@ export const getAllProfiles = () => dispatch => {
 //Get Profile By Handle
 export const getProfileByHandle = (handle) => dispatch => {
   dispatch(setProfileLoading());
-  console.log(handle);
   axios
     .get(`/profile/${handle}`)
     .then(res =>
@@ -68,3 +65,31 @@ export const clearCurrentProfile = () => {
     type: CLEAR_CURRENT_PROFILE
   };
 };
+
+// //Follow user
+// export const follow = (id) => dispatch => {
+//   axios
+//       .get(`/connections/${id}/follow`)
+//       .then(res => dispatch({
+//         type: GET_ALL_PROFILES,
+//         payload: res.data
+//       }))
+//       .catch(err => dispatch({
+//           type: GET_ERRORS,
+//           payload: err
+//       }))
+// }
+
+// //Unfollow user
+// export const follow = (id) => dispatch => {
+//   axios
+//       .get(`/connections/${id}/unfollow`)
+//       .then(res => dispatch({
+//         type: GET_ALL_PROFILES,
+//         payload: res.data
+//       }))
+//       .catch(err => dispatch({
+//           type: GET_ERRORS,
+//           payload: err
+//       }))
+// }

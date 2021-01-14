@@ -37,7 +37,7 @@ class Profile extends Component {
                   <div className="card card-body bg-light mb-3">
                     <div className="row">
                       <div className="col-4">
-                        <img className="rounded-circle" src={profile[0].avatar} />
+                        <img className="rounded-circle" src={profile[0].avatar} alt="Avatar" />
                       </div>
                       <div className="col-4 p-5 text-left border-left">
                         <h3 className="text-info">{profile[0].username}'s Bio</h3>

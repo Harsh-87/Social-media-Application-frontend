@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { deleteComment } from '../../actions/postActions'
-import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 class CommentItem extends Component {
@@ -19,11 +18,11 @@ class CommentItem extends Component {
         <div className="row align-items-center">
           <div className="col-1 border-right">
             <Link to="/profiles">
-              <img class="rounded-circle" src={comment.author.avatar} />
+              <img className="rounded-circle" src={comment.author.avatar} alt="Avatar" />
             </Link>
           </div>
           <div className={comment.author._id === auth.user._id ? "col-10" : "col-11"}>
-            <div class="row">
+            <div className="row">
               <div className="col-8 text-left">
                 <span>{comment?.author?.firstname} {comment?.author?.lastname}</span>
                 <br />
@@ -38,9 +37,9 @@ class CommentItem extends Component {
             </div>
           </div>
           <div className="col-1">
-              {comment.author._id === auth.user._id ? (<button onClick={this.onDeleteClick.bind(this, postId, comment._id)} type="button" className="btn btn-danger mr-1">
-                <i className="fas fa-trash" />
-              </button>) : <React.Fragment></React.Fragment>}
+            {comment.author._id === auth.user._id ? (<button onClick={this.onDeleteClick.bind(this, postId, comment._id)} type="button" className="btn btn-danger mr-1">
+              <i className="fas fa-trash" />
+            </button>) : <React.Fragment></React.Fragment>}
           </div>
         </div>
       </div>

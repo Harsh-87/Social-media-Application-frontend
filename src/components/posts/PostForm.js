@@ -27,7 +27,6 @@ class PostForm extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const { user } = this.props.auth;
     let newPost = new FormData();
     newPost.append("title", this.state.title);
     newPost.append("description", this.state.description);
@@ -74,7 +73,7 @@ class PostForm extends Component {
                   onChange={this.onChange}
                   error={errors.text}
                 />
-                {this.state.imgURL ? (<img style={{ width: "600px", height: "500px" }} src={this.state.imgURL} />) : ('')}
+                {this.state.imgURL ? (<img style={{ width: "600px", height: "500px" }} src={this.state.imgURL} alt="Post"/>) : ('')}
               </div>
               <label for="image"><i class='m-2 p-2 fas fa-camera btn btn-light text-info' style={{ cursor: "pointer" }}> Upload Image </i></label>
               <input
