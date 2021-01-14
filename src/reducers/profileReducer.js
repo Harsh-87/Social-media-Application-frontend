@@ -1,4 +1,4 @@
-import { GET_PROFILE, GET_ALL_PROFILES, PROFILE_LOADING, PROFILES_LOADING, CLEAR_CURRENT_PROFILE } from '../actions/types'
+import { GET_PROFILE, GET_ALL_PROFILES, PROFILE_LOADING, PROFILES_LOADING, CLEAR_CURRENT_PROFILE, FOLLOW_PROFILE, UNFOLLOW_PROFILE } from '../actions/types'
 
 const initialState = {
     profile: null,
@@ -24,7 +24,12 @@ export default function profileReducer(state = initialState, action) {
 
         case CLEAR_CURRENT_PROFILE:
             return { ...state, profile: null }
-            
+
+        case FOLLOW_PROFILE:
+            return { ...state, profiles: action.payload }
+
+        case UNFOLLOW_PROFILE:
+            return { ...state, profiles: action.payload }
         default:
             return state;
     }

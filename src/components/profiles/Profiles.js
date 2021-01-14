@@ -1,32 +1,30 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Spinner from '../common/Spinner'
-import {getAllProfiles} from '../../actions/profileActions'
+import { getAllProfiles } from '../../actions/profileActions'
 import ProfilesItem from './ProfilesItem'
 class Profiles extends Component {
 
-  componentDidMount(){
-      this.props.getAllProfiles();
-  }  
+  componentDidMount() {
+    this.props.getAllProfiles();
+  }
 
   render() {
-    console.log(this.props);
-    const {profilesLoading, profiles} = this.props.profile;
+    const { profilesLoading, profiles } = this.props.profile;
     let profileItems;
-
-    if(profiles === null || profilesLoading){
-        profileItems = <Spinner />
-    }else{
-        if(profiles.length > 0){
-           profileItems = profiles.map(profile => <ProfilesItem key={profile._id} profile={profile} />)
-        }else{
-            profileItems = <h4>No Profile Here</h4>
-        }
+    if (profiles === null || profilesLoading) {
+      profileItems = <Spinner />
+    } else {
+      if (profiles.length > 0) {
+        profileItems = profiles.filter(profile => profile._id !== this.props.auth.user._id).map(profile => <ProfilesItem key={profile._id} profile={profile} />)
+      } else {
+        profileItems = <h4>No Profile Here</h4>
+      }
     }
 
     return (
-        <div className="profiles">
+      <div className="profiles">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -34,20 +32,21 @@ class Profiles extends Component {
               <p className="lead text-center">Browse and connect with people</p>
               {profileItems}
             </div>
-         </div>
+          </div>
         </div>
-        </div>      
+      </div>
     )
   }
 }
 
 Profiles.propTypes = {
-    profilesLoading: PropTypes.bool,
-    getAllProfiles: PropTypes.func
+  profilesLoading: PropTypes.bool,
+  getAllProfiles: PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
-    profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps,{getAllProfiles})(Profiles);
+export default connect(mapStateToProps, { getAllProfiles })(Profiles);

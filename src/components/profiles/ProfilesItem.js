@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-
+import { Follow, Unfollow } from './../../actions/profileActions'
 class ProfilesItem extends Component {
 
-  // FollowClick(id) {
-  //   this.props.follow(id);
-  // }
+  onFollowClick(id) {
+    this.props.Follow(id);
+  }
 
-  // onUnfollowClick(id) {
-  //   this.props.unfollow(id);
-  // }
+  onUnfollowClick(id) {
+    this.props.Unfollow(id);
+  }
 
   render() {
     const { profile } = this.props;
+    const { user } = this.props.auth;
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row align-items-center">
@@ -28,8 +30,7 @@ class ProfilesItem extends Component {
           </div>
           <div className="col-4">
             <Link to={`/profile/${profile.username}`} className="btn btn-info m-1">View Profile</Link>
-            {/* <button type="button" className="btn btn-success m-1" onClick={this.onFollowClick.bind(this, post.profile._id)}>Follow</button>
-            <button type="button" className="btn btn-secondary m-1" onClick={this.onUnfollowClick.bind(this, post.profile._id)}>Unfollow</button> */}
+            {!profile.followers.includes(user._id) ? <button type="button" className="btn btn-success m-1" onClick={this.onFollowClick.bind(this, profile._id)}>Follow</button> : <button type="button" className="btn btn-secondary m-1" onClick={this.onUnfollowClick.bind(this, profile._id)}>Unfollow</button>}
           </div>
         </div>
       </div>
@@ -37,13 +38,8 @@ class ProfilesItem extends Component {
   }
 }
 
-ProfilesItem.propTypes = {
-  profile: PropTypes.object.isRequired
-}
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
 
-// const mapStateToProps = (state) => ({
-//   profile: state.profile
-// });
-
-// connect(mapStateToProps, { follow, unfollow })
-export default ProfilesItem;
+export default connect(mapStateToProps, { Follow, Unfollow })(ProfilesItem);

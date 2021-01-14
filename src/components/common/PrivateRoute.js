@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 
 
 const PrivateRoute = (multipleprops) => {
-    console.log(multipleprops);
     const {component: Component,auth ,...rest} = multipleprops;
 
     return <Route

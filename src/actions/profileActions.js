@@ -5,6 +5,9 @@ import {
   PROFILE_LOADING,
   PROFILES_LOADING,
   CLEAR_CURRENT_PROFILE,
+  GET_ERRORS,
+  FOLLOW_PROFILE,
+  UNFOLLOW_PROFILE
 } from "./types";
 
 //Get All Profiles
@@ -41,7 +44,7 @@ export const getProfileByHandle = (handle) => dispatch => {
       dispatch({
         type: GET_PROFILE,
         payload: null
-       })
+      })
     );
 };
 
@@ -66,30 +69,30 @@ export const clearCurrentProfile = () => {
   };
 };
 
-// //Follow user
-// export const follow = (id) => dispatch => {
-//   axios
-//       .get(`/connections/${id}/follow`)
-//       .then(res => dispatch({
-//         type: GET_ALL_PROFILES,
-//         payload: res.data
-//       }))
-//       .catch(err => dispatch({
-//           type: GET_ERRORS,
-//           payload: err
-//       }))
-// }
+//Follow user
+export const Follow = (id) => dispatch => {
+  axios
+    .get(`/connections/${id}/follow`)
+    .then(res => dispatch({
+      type: FOLLOW_PROFILE,
+      payload: res.data
+    }))
+    .catch(err => dispatch({
+      type: GET_ERRORS,
+      payload: err
+    }))
+}
 
-// //Unfollow user
-// export const follow = (id) => dispatch => {
-//   axios
-//       .get(`/connections/${id}/unfollow`)
-//       .then(res => dispatch({
-//         type: GET_ALL_PROFILES,
-//         payload: res.data
-//       }))
-//       .catch(err => dispatch({
-//           type: GET_ERRORS,
-//           payload: err
-//       }))
-// }
+//Unfollow user
+export const Unfollow = (id) => dispatch => {
+  axios
+    .get(`/connections/${id}/unfollow`)
+    .then(res => dispatch({
+      type: UNFOLLOW_PROFILE,
+      payload: res.data
+    }))
+    .catch(err => dispatch({
+      type: GET_ERRORS,
+      payload: err
+    }))
+}

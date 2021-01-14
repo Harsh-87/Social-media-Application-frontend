@@ -9,7 +9,6 @@ class Profile extends Component {
 
   componentDidMount() {
     if (this.props.match.params) {
-      console.log(this.props.match.params.username.toString());
       this.props.getProfileByHandle(this.props.match.params.username.toString());
     }
   }
@@ -18,7 +17,6 @@ class Profile extends Component {
 
     const { profile, loading } = this.props.profile;
     let profileContent;
-    console.log(profile);
     if (profile === null || loading) {
       profileContent = <Spinner />
     } else {
@@ -39,10 +37,12 @@ class Profile extends Component {
                       <div className="col-4">
                         <img className="rounded-circle" src={profile[0].avatar} alt="Avatar" />
                       </div>
-                      <div className="col-4 p-5 text-left border-left">
+                      <div className="col-8 p-5 text-left border-left">
                         <h3 className="text-info">{profile[0].username}'s Bio</h3>
                         <p>Name : {profile[0].firstname} {profile[0].lastname}</p>
                         <p>Mail ID : {profile[0].email}</p>
+                        <p>Followers : {profile[0].followers.length}</p>
+                        <p>Following : {profile[0].following.length}</p>
                       </div>
                     </div>
                   </div>
