@@ -34,8 +34,10 @@ class Navbar extends Component {
         </a>
         </li>
         <li className="nav-item">
-          <img style={{ height: "35px", width: "35px" }} className="rounded-circle" src={this.props.auth.user.avatar} alt="Avatar" />
-          <span className="text-white p-2">{this.props.auth.user.firstname} {this.props.auth.user.lastname}</span>
+          <Link className="nav-link" to={"/profile/" + this.props.auth.user.username}>
+            <img style={{ height: "35px", width: "35px" }} className="rounded-circle" src={this.props.auth.user.avatar} alt="Avatar" />
+            <span className="text-white p-2">{this.props.auth.user.firstname} {this.props.auth.user.lastname}</span>
+          </Link>
         </li>
       </ul>
     );
